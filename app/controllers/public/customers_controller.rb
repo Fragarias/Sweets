@@ -7,6 +7,9 @@ class Public::CustomersController < ApplicationController
   def edit
     @customer = current_customer
   end
+  def quit
+    @customer = current_customer
+  end
   def update
     @customer = current_customer
     if @customer.update(customer_params)
@@ -14,6 +17,12 @@ class Public::CustomersController < ApplicationController
     else
       render :edit
     end
+  end
+  def withdraw
+    customer = current_customer
+    customer.update(is_active: false)
+    reset_session
+    redirect_to root_path
   end
 
   private

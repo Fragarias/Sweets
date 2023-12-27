@@ -2,6 +2,7 @@
 
 class Public::SessionsController < Devise::SessionsController
   before_action :configure_sign_in_params, only: [:create]
+  before_action :customer_state, only: [:create]
 
   # GET /resource/sign_in
   # def new
@@ -30,5 +31,22 @@ class Public::SessionsController < Devise::SessionsController
   end
   def after_sign_out_path_for(resource)
     root_path
+  end
+
+  private
+
+  def customer_state
+    #【処理内容1】入力されたemailからアカウントを一件取得
+    customer = Customer.find_by(email: params[:customer][:email])
+    #【処理内容2】アカウントを取得できなかった場合このメソッドを終了する(ログイン不可)
+    return if customer.nil?
+    #【処理内容3】取得したアカウントのパスワードと入力したパスワードが一致しない場合このメソッドを終了する(ログイン不可)
+    return unless customer.valid_password?(params[:customer][:password])
+    #【処理内容4】アクティブでない会員に対する処理
+    if customer.is_active == false
+      redirect_to new_customer_registration_path #サインアップ画面へ遷移
+    else
+      return
+    end
   end
 end
