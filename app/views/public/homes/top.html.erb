@@ -10,7 +10,9 @@
 <h3>新着商品</h3>
 <% @new_items.each do |new_item| %>
   <div>
-    <%= image_tag new_item.get_image %>
+    <%= link_to item_path(new_item) do %>
+      <%= image_tag new_item.get_image %>
+    <% end %>
     <p><%= new_item.name %></p> <!--商品名-->
     <p><%= new_item.price %></p> <!--税抜価格-->
   </div>
