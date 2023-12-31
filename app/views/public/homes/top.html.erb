@@ -14,7 +14,7 @@
       <%= image_tag new_item.get_image %>
     <% end %>
     <p><%= new_item.name %></p> <!--商品名-->
-    <p><%= new_item.price %></p> <!--税抜価格-->
+    <p><%= new_item.price.to_s(:delimited) %></p> <!--税抜価格-->
   </div>
 <% end %>
 
