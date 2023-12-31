@@ -8,7 +8,7 @@
     <th>税抜価格</th>
   </thead>
   <tbody>
-    <% @items.each do |items| %>
+    <% @items.each do |item| %>
       <tr>
         <td>
           <%= item.id %>
@@ -19,7 +19,7 @@
           <% end %>
         </td>
         <td>
-          <%= item.price %>
+          <%= item.price.to_s(:dalimited) %>
         </td>
       </tr>
     <% end %>
