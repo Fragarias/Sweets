@@ -4,10 +4,10 @@
   <p>商品画像</p>
   <%= f.file_field :image, accept: "image/*" %>
   <p>商品名</p>
-  <%= f.text_field :name %>
+  <%= f.text_field :name, autocomplete: "商品名" %>
   <p>商品説明</p>
-  <%= f.text_area :introduction %>
+  <%= f.text_area :introduction, autocomplete: "ここに説明文を記述します" %>
   <p>税抜価格</p>
-  <%= f.text_field :price %>円
+  <%= f.text_field :price, autocomplete: "1000" %>円
   <%= f.submit "新規登録", class: "btn btn-success" %>
 <% end %>
