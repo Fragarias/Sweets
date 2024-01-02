@@ -1,0 +1,12 @@
+
+<%= image_tag @item.get_image %>
+<p><%= @item.name %></p>
+<p><%= @item.introduction %></p>
+<p>¥<%= @item.add_tax_price.to_s(:delimited) %>(税込)</p>
+
+<% if @item.is_sale == true %>
+  <%= form_with model: @cart_item, url: cart_items_path, method: :post, local: true do |f| %>
+    <%= f.hidden_field :item_id, :value => @item.id %>
+    <%= f.submit "カートに入れる", class: "btn btn-success" %>
+  <% end %>
+<% end %>
