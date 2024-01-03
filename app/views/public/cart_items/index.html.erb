@@ -1,0 +1,30 @@
+<h3>ショッピングカート</h3>
+
+<table class="table" border="1" style="border-collapse: collapse">
+  <thead align="left">
+    <th height="50" width="300">商品名</th>
+    <th width="100">単価(税込)</th>
+    <th width="100">数量</th>
+    <th width="100">小計</th>
+    <th width="100"></th>
+  </thead>
+  <tbody>
+    <% @cart_items.each do |cart_item| %>
+      <tr>
+        <td height="50"><%= cart_item.item.name %></td>
+        <td><%= cart_item.item.with_tax_price %></td> <!-- item.rb -->
+        <td>
+          <%= form_with model: cart_item, url: cart_item_path(cart_item.id), method: :patch, local: true do |f| %>
+            <%= f.select :amount, *[1..10] %>
+            <%= f.submit "変更", class: "btn btn-success" %>
+          <% end %>
+        </td>
+        <td><%= cart_item.subtotal %></td> <!-- cart_item.rb -->
+        <td></td>
+      </tr>
+      <tr>
+         <td>合計金額</td><td><%= @total_price += cart_item.subtotal %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
