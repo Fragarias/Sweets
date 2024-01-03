@@ -1,0 +1,46 @@
+<h3><%= @customer.last_name %><%= @customer.first_name %>さんの会員情報編集</h3>
+
+<%= form_with model: @customer, url: admin_customer_path(@customer.id), method: :patch, local: true do |f| %>
+  <table style="border-collapse: collapse">
+    <tbody>
+      <tr align="left">
+        <td height="50" width="200">会員ID</td>
+        <td width="500"><%= @customer.id %></td>
+      </tr>
+      <tr align="left">
+        <td height="50">氏名</td>
+        <td><%= f.text_field :last_name %>　<%= f.text_field :first_name %></td>
+      </tr>
+      <tr align="left">
+        <td height="50">フリガナ</td>
+        <td><%= f.text_field :last_name_kana %>　<%= f.text_field :first_name_kana %></td>
+      </tr>
+      <tr align="left">
+        <td height="50">郵便番号</td>
+        <td><%= f.text_field :postal_code %></td>
+      </tr>
+      <tr align="left">
+        <td height="50">住所</td>
+        <td><%= f.text_field :address %></td>
+      </tr>
+      <tr align="left">
+        <td height="50">電話番号</td>
+        <td><%= f.text_field :telephone_number %></td>
+      </tr>
+      <tr align="left">
+        <td height="50">メールアドレス</td>
+        <td><%= f.text_field :email %></td>
+      </tr>
+      <tr align="left">
+        <td height="50">会員ステータス</td>
+        <td>
+          <%= f.radio_button :is_active, "true" %>
+          <%= f.label :is_active_true, "有効" %>
+          <%= f.radio_button :is_active, "false" %>
+          <%= f.label :is_active_false, "退会" %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <%= f.submit "変更を保存", class: "btn btn-success" %>
+<% end %>

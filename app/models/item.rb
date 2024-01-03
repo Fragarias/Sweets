@@ -5,15 +5,15 @@ class Item < ApplicationRecord
   has_many :cart_items, dependent: :destroy
   has_many :order_details, dependent: :destroy
 
-  def get_image
+  def get_image(width, height)
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/noimage.png')
       image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/png')
     end
-    image
+    image.variant(resize_to_limit: [width, height]).processed
   end
   def add_tax_price
     (self.price * 1.10).round
   end
-  
+
 end
