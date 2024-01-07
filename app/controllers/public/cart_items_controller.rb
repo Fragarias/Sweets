@@ -6,17 +6,16 @@ class Public::CartItemsController < ApplicationController
     @total_price = 0
   end
   def create
-    @cart_item = CartItem.new(cart_item_params)
-    @cart_item.customer_id = current_customer.id #追加したcart_itemのcustomer_idカラムにログインユーザーのidをいれる
-    #追加した商品がカート内に存在するかの判別
-    if CartItem.find_by(item_id: params[:cart_item][:item_id])
-      #存在する #カート内の個数をフォームから送られた個数分追加する
-      @cart_item = CartItem.find_by(item_id: params[:cart_item][:item_id])
-      @cart_item.amount += params[:cart_item][:amount].to_i
-      @cart_item.update(amount: @cart_item.amount)
+    cart_item = CartItem.new(cart_item_params)
+    cart_item.customer_id = current_customer.id #LoginCustomerのidを設定
+    if CartItem.find_by(item_id: params[:cart_item][:item_id]) #追加した商品がカート内に存在するかの判別
+      #存在する -カート内の個数をフォームから送られた個数分追加する
+      cart_item = CartItem.find_by(item_id: params[:cart_item][:item_id])
+      cart_item.amount += params[:cart_item][:amount].to_i
+      cart_item.update(amount: cart_item.amount) #数量のみ更新
     else
-      #存在しない #カートモデルにレコードを新規作成する
-      @cart_item.save #追加したcart_itemを保存
+      #存在しない -カートモデルにレコードを新規作成する
+      cart_item.save
     end
     redirect_to cart_items_path
   end
