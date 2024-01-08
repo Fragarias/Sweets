@@ -6,5 +6,4 @@ class Order < ApplicationRecord
     credit_card: 1,
     transfer: 2
   }
-
 end
