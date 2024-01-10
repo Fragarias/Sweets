@@ -5,7 +5,7 @@
     <th height="50" width="200">注文日</th>
     <th width="800">配送先</th>
     <th width="200">注文商品</th>
-    <th width="120">支払金額</th>
+    <th width="120">支払金額</th> <!--送料含む-->
     <th width="180">注文詳細</th>
   </thead>
   <tbody>
@@ -23,7 +23,10 @@
             <%= order_detail.item.name %><br>
           <% end %>
         </td>
-        <td><%= order.payment.to_s(:delimited) %>円</td>
+        <td>
+          <% total_payment = order.payment + order.postage %>
+          <%= total_payment.to_s(:delimited) %>円
+        </td>
         <td>
           <%= link_to "表示する", order_path(order.id), class: "btn btn-primary" %>
         </td>
