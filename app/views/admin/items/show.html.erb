@@ -1,8 +1,36 @@
 <h3>商品詳細</h3>
 
 <%= image_tag @item.get_image(100, 100) %>
-<p>商品名：<%= @item.name %></p>
-<p>商品詳細：<%= @item.introduction %></p>
-<p>税込価格(税抜価格)：<%= @item.with_tax_price.to_s(:delimited) %>(<%= @item.price.to_s(:delimited) %>)円</p>
+
+<table style="border-collapse: collapse">
+  <tbody>
+    <tr align="left">
+      <td height="50" width="200">商品名</td>
+      <td width="500"><%= @item.name %></td>
+    </tr>
+    <tr align="left">
+      <td height="50">商品説明</td>
+      <td><%= @item.introduction %></td>
+    </tr>
+    <tr align="left">
+      <td height="50">ジャンル</td>
+      <td><%= @item.genre.name %></td>
+    </tr>
+    <tr align="left">
+      <td height="50">税込価格<br>(税抜価格)</td>
+      <td><%= @item.with_tax_price.to_s(:delimited) %> (<%= @item.price.to_s(:delimited) %>) 円</td>
+    </tr>
+    <tr align="left">
+      <td height="50">販売ステータス</td>
+      <td>
+        <% if @item.is_sale == true %>
+          販売中
+        <% else %>
+          販売停止中
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <%= link_to "編集する", edit_admin_item_path(@item.id), class: "btn btn-success" %>

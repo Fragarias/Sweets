@@ -1,13 +1,38 @@
 <h3>商品新規登録</h3>
 
 <%= form_with model: @item, url: '/admin/items', method: :post, local: true do |f| %>
-  <p>商品画像</p>
-  <%= f.file_field :image, accept: "image/*" %>
-  <p>商品名</p>
-  <%= f.text_field :name, autocomplete: "商品名" %>
-  <p>商品説明</p>
-  <%= f.text_area :introduction, autocomplete: "ここに説明文を記述します" %>
-  <p>税抜価格</p>
-  <%= f.text_field :price, autocomplete: "1000" %>円
+  <table style="border-collapse: collapse">
+    <tbody>
+      <tr align="left">
+        <td height="50" width="200">商品画像</td>
+        <td width="500"><%= f.file_field :image, accept: "image/*" %></td>
+      </tr>
+      <tr align="left">
+        <td height="50">商品名</td>
+        <td><%= f.text_field :name, autocomplete: "商品名" %></td>
+      </tr>
+      <tr align="left">
+        <td height="50">商品説明</td>
+        <td><%= f.text_area :introduction, autocomplete: "ここに説明文を記述します" %></td>
+      </tr>
+      <tr align="left">
+        <td height="50">ジャンル</td>
+        <td><%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name), include_blank: "--選択してください--" %></td>
+      </tr>
+      <tr align="left">
+        <td height="50">税抜価格</td>
+        <td><%= f.text_field :price, autocomplete: "1000" %>円</td>
+      </tr>
+      <tr align="left">
+        <td height="50">販売ステータス</td>
+        <td>
+          <%= f.radio_button :is_sale, "true" %>
+          <%= f.label :is_sale_true, "販売中" %>
+          <%= f.radio_button :is_sale, "false" %>
+          <%= f.label :is_sale_false, "販売停止中" %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
   <%= f.submit "新規登録", class: "btn btn-success" %>
 <% end %>
