@@ -1,0 +1,24 @@
+<h3>ジャンル一覧・追加</h3>
+
+<%= form_with model: @genre, url: admin_genres_path, method: :post, local: true do |f| %>
+  <b>ジャンル名</b>
+  <%= f.text_field :name, autocomplete: "ジャンル名" %>
+  <%= f.submit "新規登録", class: "btn btn-success" %>
+<% end %>
+
+<table class="table">
+  <thead>
+    <th>ジャンル名</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <tr>
+      <% @genres.each do |genre| %>
+        <td><%= genre.name %></td>
+        <td>
+          <%= link_to "編集する", edit_admin_genre_path(genre.id), class: "btn btn-success" %>
+        </td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
