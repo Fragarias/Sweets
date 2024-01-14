@@ -4,8 +4,8 @@
 <table class="table" border="1" style="border-collapse: collapse">
   <tbody>
     <tr align="left">
-      <td height="50" width="200">注文日</td>
-      <td width="800"><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+      <td height="50" width="150">注文日</td>
+      <td width="500"><%= @order.created_at.strftime('%Y/%m/%d') %></td>
     </tr>
     <tr align="left">
       <td height="50">配送先</td>
@@ -19,6 +19,10 @@
       <td height="50">支払方法</td>
       <td><%= @order.payment_method_i18n %></td>
     </tr>
+    <tr align="left">
+      <td height="50">ステータス</td>
+      <td></td>
+    </tr>
   </tbody>
 </table>
 
@@ -27,7 +31,7 @@
   <tbody>
     <tr align="left">
       <td height="50" width="200">商品合計</td>
-      <td width="800"><%= @order.payment.to_s(:delimited) %></td>
+      <td width="150"><%= @order.payment.to_s(:delimited) %></td>
     </tr>
     <tr align="left">
       <td height="50">配送料</td>
@@ -48,8 +52,8 @@
 <b>注文内容</b>
 <table class="table" border="1" style="border-collapse: collapse">
   <thead align="left">
-    <th height="50" width="800">商品</th>
-    <th width="200">単価(税込)</th>
+    <th height="50" width="500">商品</th>
+    <th width="150">単価(税込)</th>
     <th width="100">個数</th>
     <th width="100">小計</th>
   </thead>

@@ -11,10 +11,10 @@
 <% @new_items.each do |new_item| %>
   <div>
     <%= link_to item_path(new_item) do %>
-      <%= image_tag new_item.get_image(100, 100) %>
+      <%= image_tag new_item.get_image(250, 250) %>
     <% end %>
     <p><%= new_item.name %></p> <!--商品名-->
-    <p><%= new_item.price.to_s(:delimited) %></p> <!--税抜価格-->
+    <p>¥<%= new_item.price.to_s(:delimited) %></p> <!--税抜価格-->
   </div>
 <% end %>
 

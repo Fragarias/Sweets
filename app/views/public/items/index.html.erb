@@ -1,9 +1,13 @@
 <h3>商品一覧 (全<%= @items.count %>件)</h3>
 
 <% @items.each do |item| %>
-  <%= link_to item_path(item.id) do %>
-    <%= image_tag item.get_image(100, 100) %>
-  <% end %>
-  <%= item.name %>
-  <%= item.price.to_s(:delimited) %>
+  <p>
+    <%= link_to item_path(item.id) do %>
+      <%= image_tag item.get_image(250, 250) %>
+    <% end %>
+  </p>
+  <p><%= item.name %></p>
+  <p>¥<%= item.price.to_s(:delimited) %></P>
 <% end %>
+
+<%= paginate @items %>
