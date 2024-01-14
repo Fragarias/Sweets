@@ -1,16 +1,16 @@
 <h3>会員一覧</h3>
 
 <table class="table">
-  <thead>
-    <th>会員ID</th>
-    <th>氏名</th>
-    <th>メールアドレス</th>
-    <th>ステータス</th>
+  <thead align="left">
+    <th height="50" width="100">会員ID</th>
+    <th width="200">氏名</th>
+    <th width="250">メールアドレス</th>
+    <th width="200">ステータス</th>
   </thead>
   <tbody>
     <% @customers.each do |customer| %>
       <tr>
-        <td>
+        <td height="50">
           <%= customer.id %>
         </td>
         <td>
@@ -32,4 +32,5 @@
     <% end %>
   </tbody>
 </table>
+
 <%= paginate @customers %>
