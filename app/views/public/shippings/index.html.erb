@@ -1,6 +1,6 @@
 <h3>配送先登録/一覧</h3>
 
-<%= form_with model: @shipp, method: :post, local: true do |f| %>
+<%= form_with model: @shipping, url: shippings_path, method: :post, local: true do |f| %>
   <table>
     <tbody>
       <tr align="left">
@@ -22,20 +22,20 @@
 
 <table class="table" border="1" style="border-collapse: collapse">
   <thead align="left">
-    <th height="50" width="150">郵便番号</th>
+    <th height="50" width="100">郵便番号</th>
     <th width="400">住所</th>
-    <th width="150">宛名</th>
-    <th width="350"></th>
+    <th width="100">宛名</th>
+    <th width="250"></th>
   </thead>
   <tbody>
-    <% @shipp.each do |shipp| %>
+    <% @shippings.each do |shipp| %>
       <tr>
-        <td><%= shipp.postal_code %></td>
+        <td height="50"><%= shipp.postal_code %></td>
         <td><%= shipp.address %></td>
         <td><%= shipp.name %></td>
         <td>
-          <%= link_to "編集する", class: "btn btn-success" %>
-          <%= link_to "削除する", class: "btn btn-danger" %>
+          <%= link_to "編集する", edit_shipping_path(shipp.id), class: "btn btn-success" %>
+          <%= link_to "削除する", shipping_path(shipp), method: :delete, class: "btn btn-danger" %>
         </td>
       </tr>
     <% end %>
