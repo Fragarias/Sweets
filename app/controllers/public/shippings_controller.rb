@@ -1,7 +1,7 @@
 class Public::ShippingsController < ApplicationController
   def index
     @shipping = Shipping.new
-    @shippings = Shipping.all
+    @shippings = current_customer.shippings.all
   end
   def create
     @shipping = Shipping.new(shipping_params)
