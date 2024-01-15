@@ -13,11 +13,15 @@ class Public::CartItemsController < ApplicationController
       cart_item = CartItem.find_by(item_id: params[:cart_item][:item_id])
       cart_item.amount += params[:cart_item][:amount].to_i
       cart_item.update(amount: cart_item.amount) #数量のみ更新
+      redirect_to cart_items_path
     else
       #存在しない -カートモデルにレコードを新規作成する
-      cart_item.save
+      if cart_item.save
+        redirect_to cart_items_path
+      else
+        redirect_to cart_items_path
+      end
     end
-    redirect_to cart_items_path
   end
   def update
     @cart_item = CartItem.find(params[:id])
