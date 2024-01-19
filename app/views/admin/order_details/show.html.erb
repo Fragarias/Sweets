@@ -25,6 +25,15 @@
     <th>支払方法</th>
     <td><%= @order.payment_method_i18n %></td>
   </tr>
+  <tr>
+    <th>注文ステータス</th>
+    <td>
+      <%= form_with model: @order, url: admin_order_path(@order.id), method: :patch, local: true do |f| %>
+        <%= f.select :status, Order.statuses.keys.map{|k|[I18n.t("enums.order.status.#{k}"), k]} %>
+        <%= f.submit "変更", class: "btn btn-success" %>
+      <% end %>
+    </td>
+  </tr>
 </table>
 
 <table border="1" style="border-collapse: collapse">
@@ -33,6 +42,7 @@
     <th width="100">単価(税込)</th>
     <th width="100">数量</th>
     <th width="100">小計</th>
+    <th width="300">製作ステータス</th>
   </thead>
   <tbody>
     <% @order_details.each do |order_detail| %>
@@ -43,6 +53,12 @@
         <td>
           <% @subtotal = order_detail.price * order_detail.amount %>
           <%= @subtotal.to_s(:delimited) %>
+        </td>
+        <td>
+          <%= form_with model: order_detail, url: admin_order_detail_path(order_detail.id), method: :patch, local: true do |f| %>
+              <%= f.select :production_status, OrderDetail.production_statuses.keys.map{|k|[I18n.t("enums.order_detail.production_status.#{k}"), k]} %>
+              <%= f.submit "変更", class: "btn btn-success" %>
+          <% end %>
         </td>
       </tr>
       <% @total_price += @subtotal %>
@@ -61,9 +77,9 @@
   </tr>
   <tr>
     <th>請求金額合計</th>
-    <td>
+    <th>
       <% total = @total_price + @order.postage %>
       <%= total.to_s(:delimited) %>円
-    </td>
+    </th>
   </tr>
 </table>
