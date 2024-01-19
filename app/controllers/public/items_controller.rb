@@ -1,7 +1,12 @@
 class Public::ItemsController < ApplicationController
 
   def index
-    @items = Item.all.page(params[:page]).per(8)
+    if params[:name]
+      @name = params[:name]
+      @items = Item.where(name: @name).page(params[:page])
+    else
+      @items = Item.all.page(params[:page]).per(8)
+    end
   end
   def show
     @item = Item.find(params[:id])

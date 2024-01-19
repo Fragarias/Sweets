@@ -12,7 +12,12 @@ class Admin::ItemsController < ApplicationController
     end
   end
   def index
-    @items = Item.page(params[:page])
+    if params[:name]
+      @name = params[:name]
+      @items = Item.where(name: @name).page(params[:page])
+    else
+      @items = Item.page(params[:page])
+    end
   end
   def show
     @item = Item.find(params[:id])

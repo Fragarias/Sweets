@@ -5,6 +5,7 @@
     <th height="50" width="200">購入日時</th>
     <th width="200">購入者</th>
     <th width="200">注文個数</th>
+    <th width="200">注文ステータス</th>
   </thead>
   <tbody>
     <% @orders.each do |order| %>
@@ -20,6 +21,7 @@
           <% @quantity = @order_details.sum(:amount) %>
           <%= @quantity %>
         </td>
+        <td><%= order.status_i18n %></td>
       </tr>
     <% end %>
   </tbody>

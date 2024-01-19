@@ -37,6 +37,12 @@
                 <li class="nav-item">
                   <%= link_to "ログアウト", destroy_admin_session_path, class: 'nav-link text-dark', method: :delete %>
                 </li>
+                <div>
+                  <%= form_with url: admin_items_path, method: :get do |f| %>
+                    <%= f.text_field :name %>
+                    <%= f.submit "検索" %>
+                  <% end %>
+                </div>
               <% elsif customer_signed_in? %>
                 <li class="nav-item">
                   <%= link_to "マイページ", customers_my_page_path, class: 'nav-link text-dark' %>
@@ -50,6 +56,12 @@
                 <li class="nav-item">
                   <%= link_to "ログアウト", destroy_customer_session_path, class: 'nav-link text-dark', method: :delete %>
                 </li>
+                <div>
+                  <%= form_with url: items_path, method: :get do |f| %>
+                    <%= f.text_field :name %>
+                    <%= f.submit "検索" %>
+                  <% end %>
+                </div>
               <% else%>
                 <li class="nav-item">
                   <%= link_to "About", about_path, class: 'nav-link text-dark' %>
@@ -63,6 +75,12 @@
                 <li class="nav-item">
                   <%= link_to "ログイン", new_customer_session_path, class: 'nav-link text-dark' %>
                 </li>
+                <div>
+                  <%= form_with url: items_path, method: :get do |f| %>
+                    <%= f.text_field :name %>
+                    <%= f.submit "検索" %>
+                  <% end %>
+                </div>
               <% end %>
             </ul>
           </div>
