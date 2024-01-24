@@ -1,14 +1,30 @@
-<%= render 'genres', genres: @genres %>
-
-<%= image_tag @item.get_image(300, 300) %><br>
-<b><%= @item.name %></b>
-<p><%= @item.introduction %></p>
-<p><b>¥ <%= @item.with_tax_price.to_s(:delimited) %></b>(税込)</p>
-
-<% if @item.is_sale == true %>
-  <%= form_with model: @cart_item, url: cart_items_path, method: :post, local: true do |f| %>
-    <%= f.hidden_field :item_id, :value => @item.id %>
-    <%= f.select :amount, *[1..10], include_blank: "個数選択" %>
-    <%= f.submit "カートに入れる", class: "btn btn-success" %>
-  <% end %>
-<% end %>
+<div class="container px-5 px-sm-0">
+  <div class="row m-3 pt-3">
+    <div class="col-3">
+      <%= render 'genres', genres: @genres %>
+    </div>
+    <div class="col-9">
+      <div class="row justify-content-center">
+        <div class="col-4">
+          <%= image_tag @item.get_image(300, 300) %>
+        </div>
+        <div class="col-7 offset-1">
+          <h3 class="row my-3 font-weight-bold"><%= @item.name %></h3>
+          <h5 class="row mb-5" height="200"><%= @item.introduction %></h5>
+          <div class="row">
+            <h4>¥ <%= @item.with_tax_price.to_s(:delimited) %></h4><small class="my-auto">(税込)</small>
+          </div>
+          <div class="row mt-3 pl-3">
+            <% if @item.is_sale == true %>
+              <%= form_with model: @cart_item, url: cart_items_path, method: :post, local: true do |f| %>
+                <%= f.hidden_field :item_id, :value => @item.id %>
+                <%= f.select :amount, *[1..10], include_blank: "個数選択" %>
+                <%= f.submit "カートに入れる", class: "ml-5 btn btn-success" %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
