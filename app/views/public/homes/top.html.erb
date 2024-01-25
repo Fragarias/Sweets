@@ -1,21 +1,34 @@
-<%= render 'public/items/genres', genres: @genres %>
-
-<div>
-  <p>ようこそ、ながのCAKEへ！<br>
-    このサイトは、ケーキ販売のECサイトになります。<br>
-    会員でない方も商品の閲覧はできますが、<br>
-    購入には会員登録が必要になります。</p>
-</div>
-
-<h3>新着商品</h3>
-<% @new_items.each do |new_item| %>
-  <div>
-    <%= link_to item_path(new_item) do %>
-      <%= image_tag new_item.get_image(250, 250) %>
-    <% end %>
-    <p><%= new_item.name %></p> <!--商品名-->
-    <p>¥<%= new_item.price.to_s(:delimited) %></p> <!--税抜価格-->
+<div class="container px-5 px-sm-0">
+  <div class="row m-3 pt-3">
+    <div class="col-3">
+      <%= render 'public/items/genres', genres: @genres %>
+    </div>
+    <div class="col-9">
+      <div class="m-5">
+        ようこそ、ながのCAKEへ！<br>
+        このサイトは、ケーキ販売のECサイトになります。<br>
+        会員でない方も商品の閲覧はできますが、<br>
+        購入には会員登録が必要になります。
+      </div>
+      <h3 class="my-3 font-weight-bold">新着商品</h3>
+      <div class="row">
+        <% @new_items.each do |new_item| %>
+          <div class="col-3">
+            <div class="row">
+              <%= link_to item_path(new_item) do %>
+                <%= image_tag new_item.get_image(150, 150) %>
+              <% end %>
+            </div>
+            <div class="mt-2 font-weight-bold"><%= new_item.name %></div> <!--商品名-->
+            <div class="mt-2 font-weight-bold">¥<%= new_item.price.to_s(:delimited) %></div> <!--税抜価格-->
+          </div>
+        <% end %>
+      </div>
+      <div class="row mt-3">
+        <div class="ml-auto">
+          <%= link_to "全ての商品を見る >", items_path %>
+        </div>
+      </div>
+    </div>
   </div>
-<% end %>
-
-<%= link_to "全ての商品を見る >", items_path %>
+</div>

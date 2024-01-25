@@ -1,27 +1,52 @@
-<h3 class="px-3">マイページ</h3>
+<div class="container px-3 px-sm-0">
+  <div class="row m-3 py-2">
+    <div class="col-3">
+      <h4 class="bg text-center">マイページ</h4>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-2">
+      <h5 class="middle font-weight-bold">登録情報</h5>
+    </div>
+    <div class="col-3">
+      <%= link_to "編集する", customers_information_edit_path, class: "btn btn-success" %>
+    </div>
+  </div>
+  <table border="1" style="border-collapse: collapse">
+    <tr align="left">
+      <th bgcolor="#e5e4e6" height="50" width="200">氏名</th><td width="500"><%= @customer.last_name %>　<%= @customer.first_name %></td>
+    </tr>
+    <tr align="left">
+      <th bgcolor="#e5e4e6" height="50">カナ</th><td><%= @customer.last_name_kana %>　<%= @customer.first_name_kana %></td>
+    </tr>
+    <tr align="left">
+      <th bgcolor="#e5e4e6" height="50">郵便番号</th><td><%= @customer.postal_code %></td>
+    </tr>
+    <tr align="left">
+      <th bgcolor="#e5e4e6" height="50">住所</th><td><%= @customer.address %></td>
+    </tr>
+    <tr align="left">
+      <th bgcolor="#e5e4e6" height="50">電話番号</th><td><%= @customer.telephone_number %></td>
+    </tr>
+    <tr align="left">
+      <th bgcolor="#e5e4e6" height="50">メールアドレス</th><td><%= @customer.email %></td>
+    </tr>
+  </table>
 
-<b>登録情報</b>　<%= link_to "編集する", customers_information_edit_path, class: "btn btn-success" %>
-
-<table border="1" style="border-collapse: collapse">
-  <tr align="left">
-    <th bgcolor="#e5e4e6" height="50" width="200">氏名</th><td width="500"><%= @customer.last_name %>　<%= @customer.first_name %></td>
-  </tr>
-  <tr align="left">
-    <th bgcolor="#e5e4e6" height="50">カナ</th><td><%= @customer.last_name_kana %>　<%= @customer.first_name_kana %></td>
-  </tr>
-  <tr align="left">
-    <th bgcolor="#e5e4e6" height="50">郵便番号</th><td><%= @customer.postal_code %></td>
-  </tr>
-  <tr align="left">
-    <th bgcolor="#e5e4e6" height="50">住所</th><td><%= @customer.address %></td>
-  </tr>
-  <tr align="left">
-    <th bgcolor="#e5e4e6" height="50">電話番号</th><td><%= @customer.telephone_number %></td>
-  </tr>
-  <tr align="left">
-    <th bgcolor="#e5e4e6" height="50">メールアドレス</th><td><%= @customer.email %></td>
-  </tr>
-</table>
-
-<b>配送先</b>　<%= link_to "一覧を見る", shippings_path, class: "btn btn-primary" %>
-<b>注文履歴</b>　<%= link_to "一覧を見る", orders_path, class: "btn btn-primary" %>
+  <div class="row my-3">
+    <div class="col-2">
+      <h5 class="middle font-weight-bold">配送先</h5>
+    </div>
+    <div class="col-3">
+      <%= link_to "一覧を見る", shippings_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-2">
+      <h5 class="middle font-weight-bold">注文履歴</h5>
+    </div>
+    <div class="col-3">
+      <%= link_to "一覧を見る", orders_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>

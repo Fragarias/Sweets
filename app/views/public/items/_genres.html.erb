@@ -1,14 +1,14 @@
 <table border="1" style="border-collapse: collapse">
   <thead>
-    <tr>
-      <th width="200">ジャンル検索</th>
+    <tr align="center">
+      <th width="200" height="30">ジャンル検索</th>
     </tr>
   </thead>
   <tbody>
     <% genres.each do |genre| %>
       <tr>
-        <td height="50" style="border-top: none;">
-          <%= link_to genre.name, items_path(genre_id: genre.id) %>
+        <td class="pl-3" height="50" style="border-top: none;">
+          <%= link_to genre.name, items_path(genre_id: genre.id), class: "text-dark" %>
         </td>
       </tr>
     <% end %>

@@ -2,7 +2,7 @@ class Admin::OrdersController < ApplicationController
   before_action :authenticate_admin!
   def show
     @customer = Customer.find(params[:id])
-    @orders = @customer.orders.all
+    @orders = @customer.orders.page(params[:page])
   end
   def update
     @order = Order.find(params[:id])

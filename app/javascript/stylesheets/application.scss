@@ -1,1 +1,17 @@
 @use '~bootstrap/scss/bootstrap';
+
+.bg {
+  background-color: #ddd;
+}
+.link-dark {
+  color: black;
+  text-decoration: underline;
+}
+
+.font {
+  font-size: 700%;
+}
+
+.middle {
+  vertical-align: middle;
+}

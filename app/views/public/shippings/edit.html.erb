@@ -1,21 +1,32 @@
-<h3>配送先編集</h3>
-
-<%= form_with model: @shipping, url: shipping_path(@shipping.id), method: :patch, local: true do |f| %>
-  <table>
-    <tbody>
-      <tr align="left">
-        <th height="50" width="300">郵便番号(ハイフンなし)</th>
-        <td width="600"><%= f.text_field :postal_code %></td>
-      </tr>
-      <tr align="left">
-        <th height="50">住所</th>
-        <td><%= f.text_field :address %></td>
-      </tr>
-      <tr align="left">
-        <th height="50">宛名</th>
-        <td><%= f.text_field :name %></td>
-      </tr>
-    </tbody>
-  </table>
-  <%= f.submit "変更内容を保存", class: "btn btn-success" %>
-<% end %>
+<div class="container px-5 px-sm-0">
+  <div class="row m-4 pt-2">
+    <div class="col-3">
+      <h4 class="bg text-center">配送先編集</h4>
+    </div>
+  </div>
+  <%= form_with model: @shipping, url: shipping_path(@shipping.id), method: :patch, local: true do |f| %>
+    <div class="row pt-3 pb-5">
+      <div class="col-10">
+        <table>
+          <tbody>
+            <tr align="left">
+              <th height="40" width="200">郵便番号(ハイフンなし)</th>
+              <td width="600"><%= f.text_field :postal_code, size: "30" %></td>
+            </tr>
+            <tr align="left">
+              <th height="40">住所</th>
+              <td><%= f.text_field :address, size: "70" %></td>
+            </tr>
+            <tr align="left">
+              <th height="40">宛名</th>
+              <td><%= f.text_field :name, size: "30" %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-2 mt-auto">
+        <%= f.submit "変更内容を保存", class: "btn btn-success" %>
+      </div>
+    </div>
+  <% end %>
+</div>

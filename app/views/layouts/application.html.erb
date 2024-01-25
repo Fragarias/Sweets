@@ -1,93 +1,100 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Sweets</title>
+    <title>ながのCAKE</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <script src="https://kit.fontawesome.com/65f238b083.js" crossorigin="anonymous"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column vh-100">
     <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-          <span class="navbar-brand text-black h1">LOGO</span>
+          <div class="col">
+            <a class="p-3" href="/">
+              <span class="navbar-brand text-black h1">ながのCAKE</span>
+            </a>
+          </div>
+          <div class="col ml-5">
+            <% if customer_signed_in? %>
+              <h6>ようこそ、<%= current_customer.last_name %>さん！</h6>
+            <% end %>
+          </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <div class="collapse navbar-collapse flex-column" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
               <% if admin_signed_in? %>
                 <li class="nav-item">
-                  <%= link_to "商品一覧", admin_items_path, class: 'nav-link text-dark' %>
+                  <%= link_to "商品一覧", admin_items_path, class: 'nav-link text-dark border rounded' %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "会員一覧", admin_customers_path, class: 'nav-link text-dark' %>
+                  <%= link_to "会員一覧", admin_customers_path, class: 'nav-link text-dark border rounded' %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "注文履歴一覧", admin_root_path, class: 'nav-link text-dark' %>
+                  <%= link_to "注文履歴一覧", admin_root_path, class: 'nav-link text-dark border rounded' %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "ジャンル一覧", admin_genres_path, class: 'nav-link text-dark' %>
+                  <%= link_to "ジャンル一覧", admin_genres_path, class: 'nav-link text-dark border rounded' %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "ログアウト", destroy_admin_session_path, class: 'nav-link text-dark', method: :delete %>
+                  <%= link_to "ログアウト", destroy_admin_session_path, class: 'nav-link text-dark border rounded', method: :delete %>
                 </li>
-                <div>
-                  <%= form_with url: admin_items_path, method: :get do |f| %>
-                    <%= f.text_field :name %>
-                    <%= f.submit "検索" %>
-                  <% end %>
-                </div>
               <% elsif customer_signed_in? %>
                 <li class="nav-item">
-                  <%= link_to "マイページ", customers_my_page_path, class: 'nav-link text-dark' %>
+                  <%= link_to "マイページ", customers_my_page_path, class: 'nav-link text-dark border rounded' %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "商品一覧", items_path, class: 'nav-link text-dark' %>
+                  <%= link_to "商品一覧", items_path, class: 'nav-link text-dark border rounded' %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "カート", cart_items_path, class: 'nav-link text-dark' %>
+                  <%= link_to "カート", cart_items_path, class: 'nav-link text-dark border rounded' %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "ログアウト", destroy_customer_session_path, class: 'nav-link text-dark', method: :delete %>
+                  <%= link_to "ログアウト", destroy_customer_session_path, class: 'nav-link text-dark border rounded', method: :delete %>
                 </li>
-                <div>
-                  <%= form_with url: items_path, method: :get do |f| %>
-                    <%= f.text_field :name %>
-                    <%= f.submit "検索" %>
-                  <% end %>
-                </div>
-              <% else%>
+              <% else %>
                 <li class="nav-item">
-                  <%= link_to "About", about_path, class: 'nav-link text-dark' %>
+                  <%= link_to "About", about_path, class: 'nav-link text-dark border rounded' %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "商品一覧", items_path, class: 'nav-link text-dark' %>
+                  <%= link_to "商品一覧", items_path, class: 'nav-link text-dark border rounded' %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "新規登録", new_customer_registration_path, class: 'nav-link text-dark' %>
+                  <%= link_to "新規登録", new_customer_registration_path, class: 'nav-link text-dark border rounded' %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "ログイン", new_customer_session_path, class: 'nav-link text-dark' %>
+                  <%= link_to "ログイン", new_customer_session_path, class: 'nav-link text-dark border rounded' %>
                 </li>
-                <div>
-                  <%= form_with url: items_path, method: :get do |f| %>
-                    <%= f.text_field :name %>
-                    <%= f.submit "検索" %>
-                  <% end %>
-                </div>
               <% end %>
             </ul>
+            <div class="ml-auto">
+              <% if admin_signed_in? %> <!-- 管理者ログイン時 -->
+                <%= form_with url: admin_items_path, method: :get do |f| %>
+                  <%= f.text_field :name, placeholder: "Search" %>
+                  <%= f.submit "検索" %>
+                <% end %>
+              <% else %> <!-- 顧客ログイン時 又は ログアウト時 -->
+                <%= form_with url: items_path, method: :get do |f| %>
+                  <%= f.text_field :name, placeholder: "Search" %>
+                  <%= f.submit "検索" %>
+                <% end %>
+              <% end %>
+            </div>
           </div>
         </div>
       </nav>
     </header>
     <main>
+      <div class="container px-5 my-3">
+        <%= flash[:notice] %>
+      </div>
       <%= yield %>
     </main>
     <footer></footer>
