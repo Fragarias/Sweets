@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <script src="https://kit.fontawesome.com/65f238b083.js" crossorigin="anonymous"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -85,6 +85,9 @@
       </nav>
     </header>
     <main>
+      <div class="container px-5 my-3">
+        <%= flash[:notice] %>
+      </div>
       <%= yield %>
     </main>
     <footer></footer>

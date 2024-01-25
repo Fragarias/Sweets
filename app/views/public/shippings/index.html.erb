@@ -1,4 +1,12 @@
 <div class="container px-5 px-sm-0">
+  <% if @shipping.errors.any? %>
+    <%= @shipping.errors.count %>件のエラーが発生しました
+    <ul>
+      <% @shipping.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
   <div class="row m-4 pt-2">
     <div class="col-3">
       <h4 class="bg text-center">配送先登録/一覧</h4>
